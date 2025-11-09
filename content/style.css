@@ -10,6 +10,19 @@ body,
   inset: 0;
 }
 
+.repeater-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #0a66c2;
+  background: rgba(10, 102, 194, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 700 9px system-ui, sans-serif;
+  color: #ffffff;
+}
+
 .leaflet-popup-content {
   font: 13px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }

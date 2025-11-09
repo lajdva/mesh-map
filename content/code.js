@@ -5,9 +5,9 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+let edgeLayer = L.layerGroup().addTo(map);
 let sampleLayer = L.layerGroup().addTo(map);
 let repeaterLayer = L.layerGroup().addTo(map);
-let edgeLayer = L.layerGroup().addTo(map);
 
 function escapeHtml(s) {
   return String(s)
@@ -28,8 +28,13 @@ function sampleMarker(s) {
 
 function repeaterMarker(r) {
   const color = '#0a66c2';
-  const style = { radius: 6, weight: 2, color: color, fillOpacity: .25 };
-  const marker = L.circleMarker([r.lat, r.lon], style);
+  const icon = L.divIcon({
+    className: '', // Don't use Leaflet style.
+    html: `<div class="repeater-dot"><span>${r.id}</span></div>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
+  });
+  const marker = L.marker([r.lat, r.lon], { icon: icon });
   const details = [
     `<strong>${escapeHtml(r.name)} [${r.id}]</strong>`,
     `${r.lat.toFixed(4)}, ${r.lon.toFixed(4)}`
@@ -60,6 +65,9 @@ function renderNodes(nodes) {
     idToRepeater.set(r.id, [r.lat, r.lon]);
   });
 
+  // TODO: for dupe repeater ids, pick the closest.
+  // TODO: render paths only when hovered over a sample.
+
   outEdges.forEach(edge => {
     const to = idToRepeater.get(edge.id);
 
@@ -67,7 +75,7 @@ function renderNodes(nodes) {
       console.log(`Missing repeater ${edge.id}`);
     } else {
       const from = edge.pos;
-      L.polyline([from, to], { weight: 2, opacity: 0.8, dashArray: '4,6' }).addTo(edgeLayer);
+      L.polyline([from, to], { weight: 2, opacity: 0.8, dashArray: '1,6' }).addTo(edgeLayer);
     }
   });
 }
