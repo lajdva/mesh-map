@@ -2,8 +2,8 @@
 Description=MeshCore Coverage Bot (MQTT)
 
 [Service]
-WorkingDirectory=/home/username/wardrive
-ExecStart=/home/username/wardrive/bin/python3 -u /home/username/wardrive/wardrive-mqtt.py
+WorkingDirectory=/home/SDR/wardrive
+ExecStart=/home/SDR/wardrive/bin/python3 -u /home/SDR/wardrive/wardrive-mqtt.py
 Environment="PYTHONUNBUFFERED=1"
 Environment="PATH=/home/username/wardrive/bin:/usr/local/bin:/usr/bin"
 Restart=always
