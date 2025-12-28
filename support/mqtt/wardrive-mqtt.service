@@ -5,13 +5,13 @@ Description=MeshCore Coverage Bot (MQTT)
 WorkingDirectory=/home/SDR/wardrive
 ExecStart=/home/SDR/wardrive/bin/python3 -u /home/SDR/wardrive/wardrive-mqtt.py
 Environment="PYTHONUNBUFFERED=1"
-Environment="PATH=/home/username/wardrive/bin:/usr/local/bin:/usr/bin"
+Environment="PATH=/home/SDR/wardrive/bin:/usr/local/bin:/usr/bin"
 Restart=always
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-User=root
-Group=root
+User=SDR
+Group=SDR
 
 [Install]
 WantedBy=multi-user.target
